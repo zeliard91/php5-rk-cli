@@ -7,7 +7,7 @@ RUN echo "deb http://archive.ubuntu.com/ubuntu trusty main universe" > /etc/apt/
     apt-key adv --keyserver keyserver.ubuntu.com --recv-key E5267A6C && \
     apt-get update && \
     apt-get -y dist-upgrade && \
-    apt-get -y install curl git php5-fpm php5-gd \
+    apt-get -y install curl git php5-fpm php5-gd php5-intl \
     php5-mcrypt php5-mongo php5-curl php5-mysql php5-sqlite
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
