@@ -1,13 +1,16 @@
-PHP 5.5 CLI for CI
+PHP 7.0 CLI for CI
 ==================
 
-PHP 5.5 CLI for continuous integration with extensions :
+PHP 7.0 CLI for continuous integration with extensions :
 
 * cURL
 * GD
-* mcrypt
+* Intl
+* Mcrypt
+* Memcached
 * MongoDB
 * MySQL
 * SQLite
+* Zip
 
 Composer.phar and git are also installed.

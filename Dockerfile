@@ -9,7 +9,7 @@ RUN echo "deb http://archive.ubuntu.com/ubuntu trusty main universe" > /etc/apt/
     apt-get -y dist-upgrade && \
     apt-get -y install curl git php7.0-fpm php7.0-gd php7.0-intl \
     php7.0-mcrypt php7.0-curl php7.0-mysql php7.0-sqlite php7.0-xml \
-    php7.0-mbstring php7.0-zip
+    php7.0-mbstring php7.0-zip php-memcached
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
