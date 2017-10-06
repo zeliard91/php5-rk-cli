@@ -7,9 +7,16 @@ RUN echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu xenial main" >> /etc/ap
     apt-key adv --keyserver keyserver.ubuntu.com --recv-key E5267A6C && \
     apt-get update && \
     apt-get -y dist-upgrade && \
-    apt-get -y install curl git libxrender1 php7.1-fpm php7.1-gd php7.1-intl \
+    apt-get -y install curl git php7.1-fpm php7.1-gd php7.1-intl \
     php7.1-mcrypt php7.1-curl php7.1-mysql php7.1-sqlite php7.1-xml \
-    php7.1-mbstring php7.1-zip php-memcached php-redis php7.1-zip
+    php7.1-mbstring php7.1-zip php-memcached php-redis php7.1-zip \
+    wget xz-utils libqt4-network fontconfig libjpeg8 libxrender1 libxext6 xfonts-base xfonts-75d
+
+# Install wkhtmltox
+RUN wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz && \
+    tar Jxvf wkhtmltox-0.12.4_linux-generic-amd64.tar.xz && \
+    cp -r wkhtmltox/* /usr/local/ && \
+    rm -rf wkhtmltox
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
