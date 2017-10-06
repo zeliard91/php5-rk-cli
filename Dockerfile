@@ -14,7 +14,7 @@ RUN echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu xenial main" >> /etc/ap
 
 # Install wkhtmltox
 RUN wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz && \
-    apt install libssl-dev=1.0.2g-1ubuntu4.8 && \
+    apt-get -y install libssl-dev=1.0.2g-1ubuntu4.8 && \
     tar Jxvf wkhtmltox-0.12.4_linux-generic-amd64.tar.xz && \
     cp -r wkhtmltox/* /usr/local/ && \
     rm -rf wkhtmltox
