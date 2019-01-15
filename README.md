@@ -1,7 +1,7 @@
-PHP 7.2 CLI for CI
+PHP 7.3 CLI for CI
 ==================
 
-PHP 7.2 CLI for continuous integration with extensions :
+PHP 7.3 CLI for continuous integration with extensions :
 
 * cURL
 * GD
