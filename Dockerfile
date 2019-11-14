@@ -7,7 +7,7 @@ RUN apt-get update && \
     add-apt-repository -y ppa:ondrej/php && \
     apt-get update && \
     apt-get -y dist-upgrade && \
-    apt-get -y install curl git php7.3-fpm php7.3-gd php7.3-intl \
+    apt-get -y install curl git zip php7.3-fpm php7.3-gd php7.3-intl \
     php7.3-curl php7.3-mysql php7.3-sqlite php7.3-xml \
     php7.3-mbstring php7.3-zip php-memcached php-redis php-ssh2 \
     wget xz-utils libqt4-network fontconfig libjpeg8 libxrender1 libxext6 xfonts-base
