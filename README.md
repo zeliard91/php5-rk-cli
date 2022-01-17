@@ -1,7 +1,7 @@
-PHP 7.4 CLI for CI
+PHP 8.1 CLI for CI
 ==================
 
-PHP 7.4 CLI for continuous integration with extensions :
+PHP 8.1 CLI for continuous integration with extensions :
 
 * cURL
 * GD

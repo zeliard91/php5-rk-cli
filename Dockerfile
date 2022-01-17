@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -7,10 +7,10 @@ RUN apt-get update && \
     add-apt-repository -y ppa:ondrej/php && \
     apt-get update && \
     apt-get -y dist-upgrade && \
-    apt-get -y install curl git zip php7.4-fpm php7.4-gd php7.4-intl \
-    php7.4-curl php7.4-mysql php7.4-sqlite php7.4-xml \
-    php7.4-mbstring php7.4-zip php7.4-memcached php7.4-redis php7.4-ssh2 \
-    wget xz-utils libqt4-network fontconfig libjpeg8 libxrender1 libxext6 xfonts-base
+    apt-get -y install curl git zip php8.1 php8.1-bz2 php8.1-cli php8.1-common php8.1-curl \
+    php8.1-fpm php8.1-gd php8.1-igbinary php8.1-imagick php8.1-imap php8.1-intl php8.1-mbstring \
+    php8.1-memcached php8.1-msgpack php8.1-mysql php8.1-opcache php8.1-readline php8.1-redis php8.1-ssh2 php8.1-xml php8.1-zip \
+    wget xz-utils fontconfig libjpeg8 libxrender1 libxext6 xfonts-base
 
 # Install wkhtmltox
 RUN wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.bionic_amd64.deb && \
@@ -20,11 +20,11 @@ RUN wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkh
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-ADD www.conf /etc/php/7.4/fpm/pool.d/
+ADD www.conf /etc/php/8.1/fpm/pool.d/
 
 # create pid folder
 RUN mkdir /run/php
 
-CMD ["php-fpm7.4", "-F"]
+CMD ["php-fpm8.1", "-F"]
 
 EXPOSE 9000
