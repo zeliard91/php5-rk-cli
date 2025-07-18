@@ -22,20 +22,14 @@ RUN wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/w
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Install Chrome
-RUN wget https://storage.googleapis.com/chrome-for-testing-public/138.0.7204.157/linux64/chrome-linux64.zip && \
-    unzip chrome-linux64.zip && \
-    mv chrome-linux64 /opt/chrome && \
+# Install Chrome and ChromeDriver
+RUN wget https://github.com/ungoogled-software/ungoogled-chromium-portablelinux/releases/download/138.0.7204.100-1/ungoogled-chromium_138.0.7204.100-1_linux.tar.xz && \
+    tar -xJf ungoogled-chromium_138.0.7204.100-1_linux.tar.xz && \
+    mv ungoogled-chromium_138.0.7204.100-1_linux /opt/chrome && \
+    find /opt/chrome/locales -type f ! -name 'en-US.pak' -delete && \
     ln -s /opt/chrome/chrome /usr/local/bin/chrome && \
-    rm chrome-linux64.zip
-
-# Install ChromeDriver
-RUN wget https://storage.googleapis.com/chrome-for-testing-public/138.0.7204.157/linux64/chromedriver-linux64.zip && \
-    unzip chromedriver-linux64.zip && \
-    mv chromedriver-linux64/chromedriver /usr/local/bin/chromedriver && \
-    chmod +x /usr/local/bin/chromedriver && \
-    rm -rf chromedriver-linux64*
-
+    ln -s /opt/chrome/chromedriver /usr/local/bin/chromedriver && \
+    rm ungoogled-chromium_138.0.7204.100-1_linux.tar.xz
 
 ADD www.conf /etc/php/8.3/fpm/pool.d/
 
