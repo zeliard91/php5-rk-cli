@@ -21,9 +21,9 @@ RUN apt-get update && \
     apt-get -y dist-upgrade && \
     apt-get -y install --no-install-recommends \
     openssh-client git zip wget xz-utils unzip 7zip-standalone vim \
-    php8.3-bz2 php8.3-cli php8.3-common php8.3-curl \
-    php8.3-fpm php8.3-gd php8.3-igbinary php8.3-imagick php8.3-imap php8.3-intl php8.3-mbstring \
-    php8.3-memcached php8.3-msgpack php8.3-mysql php8.3-opcache php8.3-readline php8.3-redis php8.3-ssh2 php8.3-xml php8.3-zip php8.3-soap php8.3-gmp php8.3-bcmath php8.3-gnupg \
+    php8.5-bz2 php8.5-cli php8.5-common php8.5-curl \
+    php8.5-fpm php8.5-gd php8.5-igbinary php8.5-imagick php8.5-imap php8.5-intl php8.5-mbstring \
+    php8.5-memcached php8.5-msgpack php8.5-mysql php8.5-readline php8.5-redis php8.5-ssh2 php8.5-xml php8.5-zip php8.5-soap php8.5-gmp php8.5-bcmath php8.5-gnupg \
     fontconfig libjpeg8 libxrender1 libxext6 xfonts-base poppler-utils xfonts-75dpi \
     libasound2t64 libatk1.0-0 libatk-bridge2.0-0 libcups2 libxcomposite1 libxrandr2 libxdamage1 tnef \
     libxkbcommon0 libpangocairo-1.0-0 libpango-1.0-0 libgbm1 libnss3 libxcb1 libxshmfence1 libxfixes3 && \
@@ -52,8 +52,8 @@ RUN wget -q https://github.com/ungoogled-software/ungoogled-chromium-portablelin
     ln -s /opt/chrome/chromedriver /usr/local/bin/chromedriver && \
     rm ungoogled-chromium_138.0.7204.100-1_linux.tar.xz
 
-ADD www.conf /etc/php/8.3/fpm/pool.d/
+ADD www.conf /etc/php/8.5/fpm/pool.d/
 
-CMD ["php-fpm8.3", "-F"]
+CMD ["php-fpm8.5", "-F"]
 
 EXPOSE 9000
