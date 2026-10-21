@@ -1,6 +1,6 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
-ENV DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && \
     apt-get -y install software-properties-common && \
@@ -13,10 +13,9 @@ RUN apt-get update && \
     wget xz-utils fontconfig libjpeg8 libxrender1 libxext6 xfonts-base poppler-utils
 
 # Install wkhtmltox
-RUN wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.bionic_amd64.deb && \
-    apt-get -y install xfonts-75dpi && \
-    dpkg -i wkhtmltox_0.12.6-1.bionic_amd64.deb && \
-    rm wkhtmltox_0.12.6-1.bionic_amd64.deb
+RUN wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.jammy_amd64.deb && \
+    apt-get -y install ./wkhtmltox_0.12.6.1-2.jammy_amd64.deb && \
+    rm wkhtmltox_0.12.6.1-2.jammy_amd64.deb
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
