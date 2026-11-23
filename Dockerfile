@@ -2,21 +2,23 @@ FROM ubuntu:24.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
+# Use the French Ubuntu mirror (default archive/security mirrors are very slow)
+RUN sed -i -E 's#http://(archive|security)\.ubuntu\.com#http://fr.archive.ubuntu.com#g' /etc/apt/sources.list.d/ubuntu.sources
+
 # Prevent services from starting during installation
 RUN echo "#!/bin/sh\nexit 0" > /usr/sbin/policy-rc.d && \
     chmod +x /usr/sbin/policy-rc.d
 
-# Add ondrej/php repository and install everything in one layer
+# Add packages.sury.org PHP repository (replaces frozen ondrej/php PPA) and install everything in one layer
 RUN apt-get update && \
     apt-get -y install --no-install-recommends \
     ca-certificates \
     curl \
-    gnupg \
     lsb-release && \
-    echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ondrej-php.list && \
-    curl -fsSL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x14aa40ec0831756756d7f66c4f4ea0aae5267a6c" -o /tmp/ondrej.key && \
-    gpg --dearmor < /tmp/ondrej.key > /etc/apt/trusted.gpg.d/ondrej-php.gpg && \
-    rm /tmp/ondrej.key && \
+    curl -fsSLo /tmp/debsuryorg-archive-keyring.deb https://packages.sury.org/debsuryorg-archive-keyring.deb && \
+    dpkg -i /tmp/debsuryorg-archive-keyring.deb && \
+    rm /tmp/debsuryorg-archive-keyring.deb && \
+    echo "deb [signed-by=/usr/share/keyrings/debsuryorg-archive-keyring.gpg] https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list && \
     apt-get update && \
     apt-get -y dist-upgrade && \
     apt-get -y install --no-install-recommends \
