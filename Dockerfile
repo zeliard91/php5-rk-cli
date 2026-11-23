@@ -2,9 +2,16 @@ FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
+# Use the French Ubuntu mirror (default archive/security mirrors are very slow)
+RUN sed -i -E 's#http://(archive|security)\.ubuntu\.com#http://fr.archive.ubuntu.com#g' /etc/apt/sources.list
+
+# Add packages.sury.org PHP repository (replaces frozen ondrej/php PPA)
 RUN apt-get update && \
-    apt-get -y install software-properties-common && \
-    add-apt-repository -y ppa:ondrej/php && \
+    apt-get -y install --no-install-recommends ca-certificates curl lsb-release && \
+    curl -fsSLo /tmp/debsuryorg-archive-keyring.deb https://packages.sury.org/debsuryorg-archive-keyring.deb && \
+    dpkg -i /tmp/debsuryorg-archive-keyring.deb && \
+    rm /tmp/debsuryorg-archive-keyring.deb && \
+    echo "deb [signed-by=/usr/share/keyrings/debsuryorg-archive-keyring.gpg] https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list && \
     apt-get update && \
     apt-get -y dist-upgrade && \
     apt-get -y install curl git zip php7.4-fpm php7.4-gd php7.4-intl \
@@ -22,7 +29,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 ADD www.conf /etc/php/7.4/fpm/pool.d/
 
 # create pid folder
-RUN mkdir /run/php
+RUN mkdir -p /run/php
 
 CMD ["php-fpm7.4", "-F"]
 
